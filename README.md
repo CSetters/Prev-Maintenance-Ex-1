@@ -78,16 +78,6 @@ FACTORY / EDGE LAYER (per site)
 
 ---
 
-## Data Flow
-
-1. Central AI model → Published to Azure Container Registry.
-2. Azure Arc pushes containers → Edge IPCs running Kubernetes.
-3. AI agents at the edge trigger alerts locally.
-4. Reports and metrics stream back to Azure.
-5. Dashboard displays performance, trends, and cost savings.
-
----
-
 ## Glossary
 
 - **Azure Arc**: Extends Azure management to on-prem and multi-cloud environments.
