@@ -50,7 +50,7 @@ FACTORY / EDGE LAYER (per site)
 ```
 
 
-DATA FLOW
+## Data Flow
 1. AI model trained → published to Azure Arc (ACR)
 2. Azure Arc pushes container → deployed to factory Kubernetes clusters
 3. Local AI makes decisions → alerts plant staff + logs activity
