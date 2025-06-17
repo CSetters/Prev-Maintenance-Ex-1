@@ -1,15 +1,16 @@
 
 # Edge-to-Cloud Agentic AI for Preventive Maintenance
+## Deployment Model of Cloud to Local Site
 
-This project outlines a scalable, cloud-integrated architecture for deploying autonomous agentic AI services across multiple factory locations to perform predictive and preventive maintenance. 
+This README details the deployment plans for a scalable, cloud-integrated architecture of an autonomous agentic AI service across multiple factory locations to perform predictive and preventive maintenance. 
 
 ## Overview
-
-I wanted to work out how a company could deploy an autonomous agentic AI system to multiple factories equipped with edge devices and local compute (IPCs) to run containerized AI models capable of detecting and acting on early signs of equipment failure. This README is a description of what I have learned regarding how to disseminate a centralized cloud layer while managing, training, and aggregating global reporting, allowing for streamlined operations, reduced downtime, and executive-level oversight.
+This diagram supports a cloud-based, autonomous agentic AI service acting through Azure tools to be deployed on factory IPCs running a Kubernetes cluster, utilizing the factory's Edge Sensors in real-time with the locally-acting agentic AI to notify the factory of potential non-scheduled maintenance needs. The expected outcome will be a reduction in maintenance issues and costs, reduced downtime, and reduced safety issues.
 
 ## Architecture Diagram for Agentic AI for Preventive Maintenance Use Case
 
 CLOUD LAYER
+``` 
 
 └── Azure Machine Learning
     └── Trains and versions the central AI model
@@ -29,28 +30,32 @@ CLOUD LAYER
 └── Central AI Dashboard (VP of Maintenance)
     └── Aggregates reports + metrics from all sites
     └── Displays trends, cost savings, and maintenance wins
+``` 
 
 FACTORY / EDGE LAYER (per site)
+``` 
 └── Industrial PC (IPC) running Kubernetes
     └── Hosts the AI agent container (deployed via Arc)
     └── Collects data from factory sensors and machines
+└── Edge Sensors
+    └── Provide live inputs (temperature, vibration, etc.)
 
+└── Local AI Agent
+    └── Analyzes inputs in real time
+    └── Triggers alerts or maintenance actions
+    └── Sends reports on activity and outcomes
+
+└── Plant Manager / Maintenance Lead
+    └── Responds to actionable local notifications
+```
 
 
 DATA FLOW
-1. AI model trained → published to ACR
+1. AI model trained → published to Azure Arc (ACR)
 2. Azure Arc pushes container → deployed to factory Kubernetes clusters
 3. Local AI makes decisions → alerts plant staff + logs activity
 4. Summary reports and metrics sync to cloud
-5. Central dashboard provides unified insights to the VP
-
-
-DATA FLOW
-1. AI model trained → published to ACR
-2. Azure Arc pushes container → deployed to factory Kubernetes clusters
-3. Local AI makes decisions → alerts plant staff + logs activity
-4. Summary reports and metrics sync to cloud
-5. Central dashboard provides unified insights to the VP
+5. Central dashboard provides unified insights to Corp 
 
 ---
 
@@ -64,7 +69,7 @@ DATA FLOW
 
 ---
 
-## 🏭 Edge Architecture (Per Factory)
+## Edge Architecture (Per Factory)
 
 - **Industrial PC (IPC)**: Hosts a Kubernetes cluster for containerized workloads.
 - **Edge Sensors**: Provide real-time equipment telemetry.
@@ -109,12 +114,19 @@ kubectl apply -f maintenance-ai-deployment.yaml
 
 ## Next in line to design:
 
-**1. Build Out the Cloud Architecture
-**2. Define the Edge Stack in Detail
-**3. Create a Sample Use Case for the AI Model
-**4. Create a Pitch Deck
+1. Build Out the Cloud Architecture.  
+2. Define the Edge Stack in Detail.  
+3. Create a Sample Use Case for the AI Model.  
+4. Create a Pitch Deck.  
 
 
+## Outcome
+
+This architecture enables:
+- Real-time predictive maintenance
+- Reduced downtime and repair costs
+- Cloud-driven oversight without compromising edge autonomy
+- Scalable deployment across factory networks
 
 ## Related Microsoft Docs
 
@@ -125,17 +137,9 @@ kubectl apply -f maintenance-ai-deployment.yaml
 
 ---
 
-## Outcome
-
-This architecture enables:
-- Real-time predictive maintenance
-- Reduced downtime and repair costs
-- Cloud-driven oversight without compromising edge autonomy
-- Scalable deployment across factory networks
-
 ---
 
 ## Contributors
 
-- **Solution Owner**: You
+- **Solution Owner**: Carol Setters
 - **Architecture Support**: ChatGPT (OpenAI)
