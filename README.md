@@ -1,15 +1,60 @@
 
-# 🏭 Edge-to-Cloud Agentic AI for Preventive Maintenance
+# Edge-to-Cloud Agentic AI for Preventive Maintenance
 
-This project outlines a scalable, cloud-integrated architecture for deploying autonomous agentic AI services across multiple factory locations to perform predictive and preventive maintenance.
+This project outlines a scalable, cloud-integrated architecture for deploying autonomous agentic AI services across multiple factory locations to perform predictive and preventive maintenance. 
 
-## 🔍 Overview
+## Overview
 
-Factories are equipped with edge devices and local compute (IPCs) that run containerized AI models capable of detecting and acting on early signs of equipment failure. A centralized cloud layer manages deployment, training, and global reporting, allowing for streamlined operations, reduced downtime, and executive-level oversight.
+I wanted to work out how a company could deploy an autonomous agentic AI system to multiple factories equipped with edge devices and local compute (IPCs) to run containerized AI models capable of detecting and acting on early signs of equipment failure. This README is a description of what I have learned regarding how to disseminate a centralized cloud layer while managing, training, and aggregating global reporting, allowing for streamlined operations, reduced downtime, and executive-level oversight.
+
+## Architecture Diagram for Agentic AI for Preventive Maintenance Use Case
+
+CLOUD LAYER
+
+└── Azure Machine Learning
+    └── Trains and versions the central AI model
+    └── Publishes model containers to Azure Container Registry (ACR)
+
+└── Azure Container Registry (ACR)
+    └── Stores versioned containers (AI service, logic, configs)
+
+└── Azure Arc
+    └── Connects to each factory’s on-site Kubernetes cluster
+    └── Deploys AI containers to registered edge locations
+
+└── Azure Monitor / Log Analytics
+    └── Collects performance metrics from edge clusters
+    └── Tracks uptime, inference success, error rates
+
+└── Central AI Dashboard (VP of Maintenance)
+    └── Aggregates reports + metrics from all sites
+    └── Displays trends, cost savings, and maintenance wins
+
+FACTORY / EDGE LAYER (per site)
+└── Industrial PC (IPC) running Kubernetes
+    └── Hosts the AI agent container (deployed via Arc)
+    └── Collects data from factory sensors and machines
+
+
+
+DATA FLOW
+1. AI model trained → published to ACR
+2. Azure Arc pushes container → deployed to factory Kubernetes clusters
+3. Local AI makes decisions → alerts plant staff + logs activity
+4. Summary reports and metrics sync to cloud
+5. Central dashboard provides unified insights to the VP
+
+
+DATA FLOW
+1. AI model trained → published to ACR
+2. Azure Arc pushes container → deployed to factory Kubernetes clusters
+3. Local AI makes decisions → alerts plant staff + logs activity
+4. Summary reports and metrics sync to cloud
+5. Central dashboard provides unified insights to the VP
 
 ---
 
-## 🌐 Cloud Architecture
+## Cloud Architecture
 
 - **Azure Machine Learning**: Trains and versions preventive maintenance models.
 - **Azure Container Registry (ACR)**: Hosts versioned containers for deployment.
@@ -28,7 +73,7 @@ Factories are equipped with edge devices and local compute (IPCs) that run conta
 
 ---
 
-## 🔄 Data Flow
+## Data Flow
 
 1. Central AI model → Published to Azure Container Registry.
 2. Azure Arc pushes containers → Edge IPCs running Kubernetes.
@@ -38,7 +83,7 @@ Factories are equipped with edge devices and local compute (IPCs) that run conta
 
 ---
 
-## 📘 Glossary
+## Glossary
 
 - **Azure Arc**: Extends Azure management to on-prem and multi-cloud environments.
 - **Edge AI**: AI that operates locally near the data source.
@@ -48,7 +93,7 @@ Factories are equipped with edge devices and local compute (IPCs) that run conta
 
 ---
 
-## 🚀 Deployment Example
+## Deployment Example
 
 ```bash
 # Tag and push the AI container
@@ -62,7 +107,16 @@ kubectl apply -f maintenance-ai-deployment.yaml
 
 ---
 
-## 📎 Related Microsoft Docs
+## Next in line to design:
+
+**1. Build Out the Cloud Architecture
+**2. Define the Edge Stack in Detail
+**3. Create a Sample Use Case for the AI Model
+**4. Create a Pitch Deck
+
+
+
+## Related Microsoft Docs
 
 - [Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/)
 - [Azure Arc](https://learn.microsoft.com/en-us/azure/azure-arc/)
@@ -71,7 +125,7 @@ kubectl apply -f maintenance-ai-deployment.yaml
 
 ---
 
-## 📈 Outcome
+## Outcome
 
 This architecture enables:
 - Real-time predictive maintenance
@@ -81,7 +135,7 @@ This architecture enables:
 
 ---
 
-## 🙌 Contributors
+## Contributors
 
 - **Solution Owner**: You
 - **Architecture Support**: ChatGPT (OpenAI)
